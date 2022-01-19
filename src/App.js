@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterMovies from './components/FilterMovies';
 import DisplayMovieResults from './components/DisplayMovieResults';
 import SearchMovies from './components/SearchMovies';
@@ -118,18 +118,19 @@ function App() {
   return (
     <div className='App'>
       <header>
-        <SearchMovies getUserSearchQuery={getUserSearchQuery} closeMovieDetails={closeMovieDetails} />
+        <SearchMovies getUserSearchQuery={getUserSearchQuery} closeMovieDetails={closeMovieDetails}/>
       </header>
       <main>
         <aside>
-          <FilterMovies showMoviesOnBtn={showMoviesOnBtn} closeMovieDetails={closeMovieDetails} />
+          <FilterMovies showMoviesOnBtn={showMoviesOnBtn} closeMovieDetails={closeMovieDetails}/>
         </aside>
         <section>
-          <DisplayMovieResults results={movie.results} filterType={movie.filterType} getMovieID={getMovieID} />
+          <DisplayMovieResults results={movie.results} filterType={movie.filterType} getMovieID={getMovieID}/>
           {/* Dont call <DisplayMovieDetails> if movie.movieDetails is null*/}
-          {typeof movie.movieDetails === 'object' ? <DisplayMovieDetails movieDetails={movie.movieDetails} closeMovieDetails={closeMovieDetails} /> : false}
+          {typeof movie.movieDetails === 'object' ?
+            <DisplayMovieDetails movieDetails={movie.movieDetails} closeMovieDetails={closeMovieDetails}/> : false}
         </section>
-        <Alert alertMsgModal={movie.alertMsgPosition} />
+        <Alert alertMsgModal={movie.alertMsgPosition}/>
       </main>
     </div>
   );
