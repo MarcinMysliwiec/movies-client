@@ -30,17 +30,21 @@
     color: #eaeaeaa7
 }
 
-.search-container input:focus, .search-container input:hover {
+.search-container input:focus,
+.search-container input:hover {
     width: 240px;
-    color: rgb(26, 38, 52);;
+    color: rgb(26, 38, 52);
+;
     background-color: #c9cdd0
 }
 
-.search-container input:focus::placeholder, .search-container input:hover::placeholder {
+.search-container input:focus::placeholder,
+.search-container input:hover::placeholder {
     color: rgb(26, 38, 52);
 }
 
-.search-container img, .search-container svg {
+.search-container img,
+.search-container svg {
     height: 100%;
     cursor: pointer;
     margin-left: 1rem;
@@ -52,4 +56,3 @@
     margin-left: 3em;
     width: 1.6rem
 }
-

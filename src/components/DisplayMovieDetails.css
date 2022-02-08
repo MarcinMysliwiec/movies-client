@@ -9,7 +9,6 @@
     justify-content: center;
     align-items: flex-start;
     background-color: rgb(26, 38, 52);
-
     overflow-y: scroll;
 }
 
@@ -107,7 +106,6 @@
     width: 0;
 }
 
-
 /* Media */
 @media screen and (max-width: 2560px) {
 }
@@ -137,7 +135,7 @@
     .movie-detail-container .movie-detail {
         transform: translateY(0%);
         border-radius: 0;
-        width:100%;
+        width: 100%;
     }
 
     .movie-detail-container .movie-detail-poster {

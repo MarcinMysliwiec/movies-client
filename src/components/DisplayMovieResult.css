@@ -3,7 +3,7 @@
     flex-flow: column nowrap;
     cursor: pointer;
     text-align: left;
-    max-width: 250px;
+    max-width: 260px;
     padding: 0;
 }
 
@@ -38,14 +38,13 @@
     }
 }
 
-@media screen and (max-width: 1920px) {
-}
+@media screen and (max-width: 1920px) {}
 
 @media screen and (max-width: 1366px) {
     .card {
         width: 90%;
+        max-width: 240px;
     }
 }
 
-@media screen and (max-width: 768px) {
-}
+@media screen and (max-width: 768px) {}
