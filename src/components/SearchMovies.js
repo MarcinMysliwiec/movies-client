@@ -1,10 +1,13 @@
 import React from 'react';
+import './SearchMovies.css';
+import { ReactComponent as LogoSvg } from '../assets/images/svgs/logo.svg';
+import { ReactComponent as SearchSvg } from '../assets/images/svgs/search.svg';
 
 function SearchMovies({ getUserSearchQuery, closeMovieDetails }) {
   return (
     <section className='search-container'>
-      <img src='/svgs/logo.svg' alt='logo' className='logo' onClick={closeMovieDetails} />
-      <img src='/svgs/search.svg' alt='search' className='search-icon' onClick={getUserSearchQuery} />
+      <LogoSvg className='logo' alt='logo' onClick={closeMovieDetails}/>
+      <SearchSvg className='search-icon' alt='search' onClick={getUserSearchQuery}/>
       <input type='text' name='searchMovie' placeholder='Search Movies...' onKeyPress={getUserSearchQuery} />
     </section>
   );
