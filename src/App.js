@@ -5,6 +5,7 @@ import DisplayMovieResults from './components/DisplayMovieResults';
 import SearchMovies from './components/SearchMovies';
 import DisplayMovieDetails from './components/DisplayMovieDetails';
 import Alert from './components/Alert';
+import './App.css';
 
 function App() {
   const TMDB_KEY = process.env.REACT_APP_TMDB_API;
@@ -13,33 +14,45 @@ function App() {
     filterType: '',
     movieDetails: '',
     alertMsgPosition: '',
+    page: 0
   });
+
+  const loadMovies = (type, page = 1) => {
+    axios(`https://api.themoviedb.org/3/movie/${type}?api_key=${TMDB_KEY}&language=en-US&page=${page}`)
+      .then((data) => {
+        let results = data.data.results;
+        setMovie((prevState) => {
+          if (prevState.results.length > 0) {
+            results = [...prevState.results, ...results]
+          }
+          return { ...prevState, results: results, filterType: type, page: page };
+          // return { ...prevState, results: results, filterType: type, page: page };
+        });
+      })
+      .catch((error) => console.log('Error:', error.message));
+  }
 
   // Get data from api when user selects Popular/NowPlaying/TopRated button
   // Load Popular movie data when page loads
   const showMoviesOnBtn = (e) => {
     const buttonType = typeof e === 'string' ? e : e.target.className;
     closeMovieDetails();
-    axios(`https://api.themoviedb.org/3/movie/${buttonType}?api_key=${TMDB_KEY}&language=en-US&page=1`)
-      .then((data) => {
-        let results = data.data.results;
-        setMovie((prevState) => {
-          return { ...prevState, results: results, filterType: buttonType };
-        });
-      })
-      .catch((error) => console.log('Error:', error.message));
+    setMovie((prevState) => {
+      return { ...prevState, results: [] };
+    });
+
+    loadMovies(buttonType)
   };
 
   // Get user search term from input field and pass it to showMoviesOnSearch()
   const getUserSearchQuery = (e) => {
-    let searchQuery = '';
+    let searchQuery;
     if (e.target.className === 'search-icon') {
       searchQuery = e.target.nextElementSibling;
-      showMoviesOnSearch(searchQuery, e);
     } else {
       searchQuery = e.target;
-      showMoviesOnSearch(searchQuery, e);
     }
+    showMoviesOnSearch(searchQuery, e);
   };
 
   // Get data from api based on user search term.
@@ -62,25 +75,6 @@ function App() {
     }
   };
 
-  // Clear input field
-  const clearSearchField = (e) => {
-    e.value = '';
-    e.blur();
-  };
-
-  //Get movie id when user clicks on card and pass it to showMovieDetails()
-  const getMovieID = (e) => {
-    let selectMovieId = '';
-    if (e.target.parentNode.className === 'card-title') {
-      //Card title
-      selectMovieId = e.target.parentNode.parentNode.id;
-    } else {
-      //Card poster
-      selectMovieId = e.target.parentNode.id;
-    }
-    showMovieDetails(selectMovieId);
-  };
-
   // Get information about a movie from api based on movies id
   const showMovieDetails = (movieID) => {
     axios(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${TMDB_KEY}&language=en-US`)
@@ -91,6 +85,25 @@ function App() {
         });
       })
       .catch((error) => console.log('Error', error.message));
+  };
+
+  // Clear input field
+  const clearSearchField = (e) => {
+    e.value = '';
+    e.blur();
+  };
+
+  //Get movie id when user clicks on card and pass it to showMovieDetails()
+  const getMovieID = (e) => {
+    let selectMovieId;
+    if (e.target.parentNode.className === 'card-title') {
+      //Card title
+      selectMovieId = e.target.parentNode.parentNode.id;
+    } else {
+      //Card poster
+      selectMovieId = e.target.parentNode.id;
+    }
+    showMovieDetails(selectMovieId);
   };
 
   //Close <DisplayMovieDetails> div
@@ -113,7 +126,9 @@ function App() {
   };
 
   // Load Popular movie when page loads
-  useEffect(() => showMoviesOnBtn('popular'), []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    showMoviesOnBtn('popular')
+  } , []);
 
   return (
     <div className='App'>
@@ -125,10 +140,12 @@ function App() {
           <FilterMovies showMoviesOnBtn={showMoviesOnBtn} closeMovieDetails={closeMovieDetails}/>
         </aside>
         <section>
-          <DisplayMovieResults results={movie.results} filterType={movie.filterType} getMovieID={getMovieID}/>
-          {/* Dont call <DisplayMovieDetails> if movie.movieDetails is null*/}
-          {typeof movie.movieDetails === 'object' ?
-            <DisplayMovieDetails movieDetails={movie.movieDetails} closeMovieDetails={closeMovieDetails}/> : false}
+          {typeof movie.movieDetails !== 'object' ?
+            <DisplayMovieResults results={movie.results} filterType={movie.filterType} page={movie.page}
+                                 getMovieID={getMovieID} loadMovies={loadMovies}/>
+            :
+            <DisplayMovieDetails movieDetails={movie.movieDetails} closeMovieDetails={closeMovieDetails}/>
+          }
         </section>
         <Alert alertMsgModal={movie.alertMsgPosition}/>
       </main>
