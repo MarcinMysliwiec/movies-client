@@ -3,7 +3,6 @@
     height: 100%;
     display: flex;
     overflow-y: hidden;
-
 }
 
 .App {
@@ -24,7 +23,8 @@ main aside {
 
 main section {
     position: relative;
-    width:100%;
+    width: 100%;
+    background-color: rgb(26, 38, 52);
 }
 
 @media screen and (max-width: 1024px) {
