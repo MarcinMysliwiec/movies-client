@@ -1,4 +1,5 @@
 import React from 'react';
+import './DisplayMovieDetails.css';
 
 function DisplayMovieDetails({ movieDetails, closeMovieDetails }) {
   let defaultPosterUrl = '/svgs/logo.svg';
@@ -16,25 +17,25 @@ function DisplayMovieDetails({ movieDetails, closeMovieDetails }) {
     .join(', ');
 
   return (
-    <div className='movieDetail-container'>
-      <div className='movieDetail-backdrop-container'>
-        <img src={movieBackdrop} className='movieDetail-backdrop' alt={`${movieDetails.title} Poster`}></img>
+    <div className='movie-detail-container'>
+      <div className='movie-detail-backdrop-container'>
+        <img src={movieBackdrop} className='movie-detail-backdrop' alt={`${movieDetails.title} Poster`}/>
         <div className='shadow'></div>
       </div>
-      <div className='movieDetail'>
-        <div onClick={closeMovieDetails} className='movieDetail-close'>
+      <div className='movie-detail'>
+        <div onClick={closeMovieDetails} className='movie-detail-close'>
           <span>X</span>
         </div>
 
-        <img src={`${moviePoster}`} className='movieDetail-poster' alt={`${title} Poster`}></img>
+        <img src={`${moviePoster}`} className='movie-detail-poster' alt={`${title} Poster`}/>
 
-        <div className='movieDetail-disc'>
-          <div className='movieDetail-title'>{title}</div>
-          <div className='movieDetail-genres'>{`Genres: ${genresList}`}</div>
+        <div className='movie-detail-disc'>
+          <div className='movie-detail-title'>{title}</div>
+          <div className='movie-detail-genres'>{`Genres: ${genresList}`}</div>
           <div> {`Runtime: ${runtime} min`}</div>
           <div>{`Release date: ${release_date}`}</div>
           <h4 style={{ color: '#eaeaea', marginTop: '30px' }}>Overview</h4>
-          <div className='movieDetail-overview'>{overview}</div>
+          <div className='movie-detail-overview'>{overview}</div>
         </div>
       </div>
     </div>
