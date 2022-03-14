@@ -11,7 +11,7 @@ const styles = {
 }
 
 function DisplayMovieResult({ result, getMovieID }) {
-  const isPosterUrlvalid = result.poster_path !== null ? `https://image.tmdb.org/t/p/w220_and_h330_face/${result.poster_path}` : '/svgs/TMDB_LOGO.svg';
+  const isPosterUrlvalid = result.poster_path !== null ? `https://image.tmdb.org/t/p/w220_and_h330_face/${result.poster_path}` : '/svgs/logo.svg';
 
   return (
     <StyleRoot className='card' onClick={getMovieID} id={result.id} style={styles.fadeIn}>
