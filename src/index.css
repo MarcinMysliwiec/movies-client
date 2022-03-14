@@ -36,7 +36,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(26, 38, 52);
+    background-color: #303b48;
     border-radius: 1.25rem;
     border: 6px solid transparent;
     background-clip: content-box;

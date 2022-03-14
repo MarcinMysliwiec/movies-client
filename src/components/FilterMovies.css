@@ -6,7 +6,7 @@
     flex-direction: column
 }
 
-.navlink-container #filter-btn {
+.navlink-container .filter-btn {
     gap: 5px;
     border: none;
     display: flex;
@@ -21,21 +21,21 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .navlink-container #filter-btn {
+    .navlink-container .filter-btn {
         font-size: 0.7rem;
         gap: 5px
     }
 }
 
 @media screen and (max-width: 650px) {
-    .navlink-container #filter-btn {
+    .navlink-container .filter-btn {
         font-size: 0.7rem;
         gap: 5px
     }
 }
 
 @media screen and (max-width: 410px) {
-    .navlink-container #filter-btn {
+    .navlink-container .filter-btn {
         font-size: 0.7rem;
         gap: 5px
     }

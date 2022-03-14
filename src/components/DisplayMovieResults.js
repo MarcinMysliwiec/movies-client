@@ -17,7 +17,7 @@ import './DisplayMovieResults.css'
 // }
 
 
-function DisplayMovieResults({ results, filterType, page, getMovieID, loadMovies }) {
+function DisplayMovieResults({ results, filterType, getMovieID, paddingMovies }) {
   let filterHeader = '';
   const [scrollLock, setScrollLock] = useState(false);
 
@@ -42,10 +42,10 @@ function DisplayMovieResults({ results, filterType, page, getMovieID, loadMovies
     const topDistance = e.target.scrollTop;
     const clientHeight = e.target.clientHeight
     const bottom = elementHeight - topDistance - (clientHeight * 1 / 9) <= clientHeight;
-    console.log(bottom)
+    // console.log(bottom)
     if (bottom) {
-      loadMovies(filterType, page + 1);
-      console.log('bottom')
+      paddingMovies(filterType);
+      // console.log('bottom')
       // scroll delayer
       setScrollLock(true);
       setTimeout(() => {

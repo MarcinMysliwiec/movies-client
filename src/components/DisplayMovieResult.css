@@ -3,8 +3,9 @@
     flex-flow: column nowrap;
     cursor: pointer;
     text-align: left;
-    max-width: 260px;
     padding: 0;
+    overflow: hidden;
+    flex: 9% 1;
 }
 
 .card .card-poster {
@@ -33,18 +34,28 @@
 
 /* Media */
 @media screen and (max-width: 2560px) {
-    .card {
-        width: 220px;
-    }
 }
 
-@media screen and (max-width: 1920px) {}
+@media screen and (max-width: 1920px) {
+    .card {
+        flex: 19% 1;
+    }
+}
 
 @media screen and (max-width: 1366px) {
     .card {
-        width: 90%;
-        max-width: 240px;
+        flex: 22% 1;
     }
 }
 
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+    .card {
+        flex: 48% 1;
+    }
+}
+
+@media screen and (max-width: 481px) {
+    .card {
+        flex: 100% 1;
+    }
+}

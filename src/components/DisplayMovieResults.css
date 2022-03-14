@@ -14,7 +14,7 @@ h1 {
     padding: 0 4rem;
     flex-flow: row wrap;
     justify-content: space-evenly;
-    gap: 3rem 2rem
+    gap: 1%;
 }
 
 
@@ -33,7 +33,6 @@ h1 {
     }
     .card-container {
         padding: 0 3rem;
-        gap: 2rem;
     }
 }
 
@@ -43,7 +42,7 @@ h1 {
         margin-top: 1.5rem;
     }
     .card-container {
-        padding: 0 2rem;
+        gap: 2%;
     }
 }
 
@@ -52,5 +51,10 @@ h1 {
         font-size: 1.5rem;
         text-align: center;
     }
-    .card-container {}
+    .card-container {
+        gap: 4%;
+    }
+}
+
+@media screen and (max-width: 481px) {
 }
