@@ -4,7 +4,7 @@ h1 {
     text-align: center;
     text-transform: capitalize;
     font-size: 3.2rem;
-    margin-top: 4rem;
+    margin: 2.5rem 0 2rem;
 }
 
 .card-container {
@@ -17,20 +17,19 @@ h1 {
     gap: 1%;
 }
 
-
 /* Media */
 @media screen and (max-width: 2560px) {
     h1 {
         font-size: 2.8rem;
-        margin-top: 3.5rem;
     }
 }
 
 @media screen and (max-width: 1920px) {
     h1 {
         font-size: 2.4rem;
-        margin-top: 3.2rem;
+        margin: 2rem 0 1.5rem;
     }
+
     .card-container {
         padding: 0 3rem;
     }
@@ -39,8 +38,9 @@ h1 {
 @media screen and (max-width: 1366px) {
     h1 {
         font-size: 2rem;
-        margin-top: 1.5rem;
+        margin: 1.5rem 0 1rem 0;
     }
+
     .card-container {
         gap: 2%;
     }
@@ -48,9 +48,9 @@ h1 {
 
 @media screen and (max-width: 768px) {
     h1 {
-        font-size: 1.5rem;
-        text-align: center;
+        margin: 1rem 0 .5rem 0;
     }
+
     .card-container {
         gap: 4%;
     }
