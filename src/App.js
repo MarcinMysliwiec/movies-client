@@ -20,6 +20,17 @@ function App() {
   }
 
   const appendMovies = (result, type, page, isSearch = false) => {
+    // let currMovies = [...movies.results];
+    // result.forEach(newItem => {
+    //   const index = currMovies.findIndex(existingItem => existingItem.id === newItem.id)
+    //   index === -1 ? currMovies.push({...newItem}) : console.log("object already exists")
+    // })
+    // setMovies((prevState) => {
+    //   return {
+    //     ...prevState, results: [...currMovies], filterType: type, isSearch: isSearch, page: page
+    //   };
+    // });
+
     setMovies((prevState) => {
       return {
         ...prevState, results: [...prevState.results, ...result], filterType: type, isSearch: isSearch, page: page
@@ -28,7 +39,6 @@ function App() {
   }
 
   const loadMovies = (type, page = 1) => {
-    // console.log('loadMovies', `https://api.themoviedb.org/3/movie/${type}?api_key=${TMDB_KEY}&language=en-US&page=${page}`);
     return axios(`https://api.themoviedb.org/3/movie/${type}?api_key=${TMDB_KEY}&language=en-US&page=${page}`)
       .then((data) => {
         return data.data.results;
@@ -67,15 +77,14 @@ function App() {
       return;
     }
     const page = movies.page + 1;
-    console.log(page, movies.isSearch, movies)
 
-    const req = (movies.isSearch) ? searchForMovie(movies.filterType, page) : loadMovies(type, page);
+    const req_1 = (movies.isSearch) ? searchForMovie(movies.filterType, page) : loadMovies(type, page);
+    const req_2 = (movies.isSearch) ? searchForMovie(movies.filterType, page + 1) : loadMovies(type, page + 1);
 
-    req.then(result => {
-      appendMovies(result, type, page, movies.isSearch)
-    }).catch(error => {
-      console.error('(1) Outside error:', error)
-    })
+    axios.all([req_1, req_2]).then(axios.spread((...responses) => {
+      appendMovies(responses[0], type, page, movies.isSearch)
+      appendMovies(responses[1], type, page + 1, movies.isSearch)
+    }));
   }
 
   // Get data from api when user selects Popular/NowPlaying/TopRated button
@@ -105,8 +114,7 @@ function App() {
       const req_3 = searchForMovie(searchingMovie, 3);
 
       axios.all([req_1, req_2, req_3]).then(axios.spread((...responses) => {
-        console.log(responses[0])
-        if(responses[0].length === 0) {
+        if (responses[0].length === 0) {
           alertMsgModal();
         } else {
           closeMovieDetails();
@@ -185,25 +193,14 @@ function App() {
     closeMovieDetails();
     resetMovies();
 
-    const type = 'popular';
+    const target = 'popular';
+    const req_1 = loadMovies(target, 1);
+    const req_2 = loadMovies(target, 2);
 
-    axios(`https://api.themoviedb.org/3/movie/${type}?api_key=${TMDB_KEY}&language=en-US&page=1`)
-      .then((data) => {
-        let first_results = data.data.results;
-        return first_results;
-      })
-      .then((first_results) => {
-        axios(`https://api.themoviedb.org/3/movie/${type}?api_key=${TMDB_KEY}&language=en-US&page=2`)
-          .then((data) => {
-            let second_results = data.data.results;
-            setMovies((prevState) => {
-              let results = [...first_results, ...second_results]
-              return {...prevState, results: results, filterType: type, page: 2};
-            });
-          })
-          .catch((error) => console.log('Error:', error.message));
-      })
-      .catch((error) => console.log('Error:', error.message));
+    axios.all([req_1, req_2]).then(axios.spread((...responses) => {
+      appendMovies(responses[0], target, 1)
+      appendMovies(responses[1], target, 2)
+    }));
   }, []);
 
   return (<div className='App'>
