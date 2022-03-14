@@ -2,7 +2,7 @@ import React from 'react';
 import './DisplayMovieDetails.css';
 
 function DisplayMovieDetails({ movieDetails, closeMovieDetails }) {
-  let defaultPosterUrl = '/svgs/logo.svg';
+  let defaultPosterUrl = './popcorn.jpg';
   let posterUrl = `https://image.tmdb.org/t/p/w220_and_h330_face`;
 
   const { title, poster_path, backdrop_path, overview, release_date, runtime, genres } = movieDetails;
