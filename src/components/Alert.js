@@ -1,9 +1,9 @@
 import React from 'react';
 import './Alert.css';
 
-function Alert({ alertMsgModal }) {
+function Alert ({ alertMsgModal }) {
   return (
-    <div className='alertmsg' style={{ right: `${alertMsgModal}` }}>
+    <div className="alertmsg" style={{ right: `${alertMsgModal}` }}>
       Movie not found
     </div>
   );

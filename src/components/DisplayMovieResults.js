@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DisplayBtnResult from './DisplayMovieResult';
-import './DisplayMovieResults.css'
+import './DisplayMovieResults.css';
 
-function DisplayMovieResults({results, filterType, getMovieID, paddingMovies}) {
+function DisplayMovieResults ({ results, filterType, getMovieID, paddingMovies }) {
   const [filterHeader, setFilterHeader] = useState('');
   const [scrollLock, setScrollLock] = useState(false);
   const ref = useRef(null);
@@ -28,12 +28,10 @@ function DisplayMovieResults({results, filterType, getMovieID, paddingMovies}) {
     if (scrollLock) return;
     const elementHeight = e.target.scrollHeight;
     const topDistance = e.target.scrollTop;
-    const clientHeight = e.target.clientHeight
+    const clientHeight = e.target.clientHeight;
     const bottom = elementHeight - topDistance - (clientHeight / 5) <= clientHeight;
-    // console.log(bottom)
     if (bottom) {
       paddingMovies(filterType);
-      // console.log('bottom')
       // scroll delayer
       setScrollLock(true);
       setTimeout(() => {
@@ -42,14 +40,12 @@ function DisplayMovieResults({results, filterType, getMovieID, paddingMovies}) {
     }
   };
 
-  return (
-    <div className='card-container' onScroll={handleScroll} ref={ref}>
+  return (<div className="card-container" onScroll={handleScroll} ref={ref}>
       <h1>{filterHeader}</h1>
       {results.map((result) => {
         return <DisplayBtnResult key={result.id} result={result} getMovieID={getMovieID}/>;
       })}
-    </div>
-  );
+    </div>);
 }
 
 export default DisplayMovieResults;
